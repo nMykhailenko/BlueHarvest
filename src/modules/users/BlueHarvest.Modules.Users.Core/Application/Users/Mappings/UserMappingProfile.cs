@@ -10,6 +10,7 @@ public class UserMappingProfile : Profile
     public UserMappingProfile()
     {
         CreateMap<CreateUserRequest, User>(MemberList.Destination)
+            .ForMember(dest => dest.Balance, options => options.MapFrom(src => src.InitialCredit))
             .ForMember(
                 dest => dest.Id, 
                 options => options.Ignore());

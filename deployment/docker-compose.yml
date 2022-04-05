@@ -1,0 +1,53 @@
+version: "3.6"
+networks:
+  blueharvest:
+    driver: bridge
+
+services:
+    blueharvest-rabbitmq:
+        container_name: rabbitmq
+        ports:
+            - 5672:5672
+            - 15672:15672
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest        
+        image: rabbitmq:3-management
+        networks:
+            - blueharvest
+
+    blueharvest-postgres-db:
+        image: postgres:latest
+        container_name: blueharvest-postgres-db
+        restart: unless-stopped
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=blueharvest.Users
+        networks:
+            - blueharvest
+        volumes:
+            - blueharvest-data:/var/lib/postgresql/data
+                    
+    blueharvest-api:
+        container_name: blueharvest-api
+        ports:
+            - 8010:80
+        image: blueharvest-api:latest   
+        build:
+            context: ../src
+            dockerfile: api/BlueHarvest.Api/Dockerfile
+        restart: on-failure
+        links: 
+            - blueharvest-postgres-db
+            - blueharvest-rabbitmq
+        depends_on:
+            - blueharvest-postgres-db
+            - blueharvest-rabbitmq
+        networks:
+            - blueharvest
+
+volumes:
+    blueharvest-data:

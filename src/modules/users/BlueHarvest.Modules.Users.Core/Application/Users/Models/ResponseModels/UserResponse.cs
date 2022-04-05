@@ -2,8 +2,9 @@
 
 public class UserResponse
 {
-    public int Id { get; set; }
-    public int CustomerId { get; set; }
-    public string FirstName { get; set; } = null!;
-    public string LastName { get; set; } = null!;
+    public Guid Id { get; init; }
+    public int CustomerId { get; init; }
+    public string FirstName { get; init; } = null!;
+    public string LastName { get; init; } = null!;
+    public decimal Balance { get; init; }
 }

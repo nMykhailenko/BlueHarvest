@@ -18,6 +18,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\shared\BlueHarvest.Shared.Application\BlueHarvest.Shared.Application.csproj" />
       <ProjectReference Include="..\..\..\shared\BlueHarvest.Shared.Infrastructure\BlueHarvest.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\transactions\BlueHarvest.Modules.Transactions.Core\BlueHarvest.Modules.Transactions.Core.csproj" />
     </ItemGroup>
 
 </Project>

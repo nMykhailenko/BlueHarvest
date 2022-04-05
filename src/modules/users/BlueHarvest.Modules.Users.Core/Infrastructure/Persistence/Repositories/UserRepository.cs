@@ -13,6 +13,9 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
+    public Task<User?> FindByUserIdAsync(Guid userId, CancellationToken ct)
+        => _context.Users.FirstOrDefaultAsync(x => x.Id == userId, ct);
+
     public Task<User?> FindByCustomerIdAsync(int customerId, CancellationToken ct)
         => _context.Users.FirstOrDefaultAsync(x => x.CustomerId == customerId, ct);
 
