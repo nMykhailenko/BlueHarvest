@@ -28,4 +28,7 @@ jobs:
       run: dotnet build -c Release --no-restore
     
     - name: Test
-      run: dotnet test -c Release --no-build --verbosity normal --filter "Category!=LongRunning"
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
+      
+    - name: Codecov
+      uses: codecov/codecov-action@v1.5.2
