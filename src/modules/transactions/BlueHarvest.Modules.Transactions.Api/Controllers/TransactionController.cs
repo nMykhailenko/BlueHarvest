@@ -17,22 +17,6 @@ namespace BlueHarvest.Modules.Transactions.Api.Controllers
 		}
 
 		/// <summary>
-		/// Create transaction.
-		/// </summary>
-		/// <param name="request">Create user request.</param>
-		/// <param name="ct">Cancellation token</param>
-		/// <returns></returns>
-		[HttpPost($"{BaseApiPath}/{TransactionsModule.ModulePath}")]
-		[Produces("application/json")]
-		[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransactionResponse))]
-		public async Task<IActionResult> AddTransaction([FromBody] CreateTransactionRequest request, CancellationToken ct)
-		{
-			var response = await _transactionService.CreateTransactionAsync(request, ct);
-
-			return Ok(response);
-		}
-
-		/// <summary>
 		/// Get transactions for user.
 		/// </summary>
 		[HttpGet($"{BaseApiPath}/users/"+"{userId:guid}/transactions")]
